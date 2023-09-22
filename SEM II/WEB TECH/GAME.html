@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple 2D Game</title>
+<style>
+  body {
+    margin-top:50px;
+    overflow: hidden;
+  }
+  canvas {
+    margin-left:30px;
+    display: block;
+    height:70%;
+    width:50%;
+  }
+</style>
+</head>
+<body>
+<canvas id="gameCanvas"></canvas>
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+const character = {
+  x: 50,
+  y: canvas.height - 50,
+  width: 30,
+  height: 30,
+  speed: 5,
+};
+
+const obstacles = [];
+
+function drawCharacter() {
+  ctx.fillStyle = "blue";
+  ctx.fillRect(character.x, character.y, character.width, character.height);
+}
+
+function drawObstacles() {
+  ctx.fillStyle = "red";
+  obstacles.forEach((obstacle) => {
+    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+  });
+}
+
+function resetGame() {
+  obstacles.length = 0;
+  character.x = 50;
+  character.y = canvas.height - 50;
+}
+
+function updateGameArea() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Move character
+  if (keys.ArrowLeft && character.x > 0) {
+    character.x -= character.speed;
+  }
+  if (keys.ArrowRight && character.x < canvas.width - character.width) {
+    character.x += character.speed;
+  }
+
+  // Spawn obstacles
+  if (Math.random() < 0.01) {
+    const obstacle = {
+      x: Math.random() * (canvas.width - 20),
+      y: -30,
+      width: 20,
+      height: 20,
+      speed: 1 + Math.random() * 1,
+    };
+    obstacles.push(obstacle);
+  }
+
+  // Update obstacle positions
+  obstacles.forEach((obstacle) => {
+    obstacle.y += obstacle.speed;
+
+    // Check for collision with character
+    if (
+      character.x < obstacle.x + obstacle.width &&
+      character.x + character.width > obstacle.x &&
+      character.y < obstacle.y + obstacle.height &&
+      character.y + character.height > obstacle.y
+    ) {
+      alert("Game Over!");
+      resetGame();
+    }
+  });
+
+  drawCharacter();
+  drawObstacles();
+  requestAnimationFrame(updateGameArea);
+}
+
+const keys = {};
+document.addEventListener("keydown", (e) => {
+  keys[e.key] = true;
+});
+
+document.addEventListener("keyup", (e) => {
+  keys[e.key] = false;
+});
+
+updateGameArea();
+</script>
+</body>
+</html>
