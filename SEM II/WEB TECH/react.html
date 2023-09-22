@@ -1,0 +1,34 @@
+<html>
+
+<head>
+
+  <title>React's React</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+</head>
+
+<body bgcolor="lightpink">
+
+  <div>
+	<center><h1 id="root"></h1></center>
+  </div>
+
+  <script>
+    // Wait for the window to load before executing the code
+    window.onload = function() {
+
+      class HelloClass extends React.Component {
+        render() {
+          return React.createElement('div', null, 'HELLO WORLD..!');
+        }
+      }
+
+      ReactDOM.render(
+        React.createElement(HelloClass, null),
+        document.getElementById('root')
+      );
+    };
+  </script>
+
+</body>
