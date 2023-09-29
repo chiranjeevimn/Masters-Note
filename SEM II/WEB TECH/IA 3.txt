@@ -1,0 +1,184 @@
+1. Principles of AJAX
+
+Minimal traffic: Ajax applications should send and receive as little information as possible to and from the server. In short, Ajax can minimize the amount of traffic between the client and the server. Making sure that your Ajax application doesn't send and receive unnecessary information adds to its robustness.
+
+No surprises: Ajax applications typically introduce different user interaction models than traditional web applications. As opposed to the web standard of click-and-wait, some Ajax applications use other user interface paradigms such as drag-and-drop or double-clicking. No matter what user interaction model you choose, be consistent so that the user knows what to do next.
+
+Established conventions: Don't waste time inventing new user interaction models that your users will be unfamiliar with. Borrow heavily from traditional web applications and desktop applications so there is a minimal learning curve.
+
+No distractions: Avoid unnecessary and distracting page elements such as looping animations, and blinking page sections. Such gimmicks distract the user from what he or she is trying to accomplish.
+
+Accessibility: Consider who your primary and secondary users will be and how they most likely will access your Ajax application. Don't program yourself into a corner so that an unexpected new audience will be completely locked out. Will your users be using older browsers or special software? Make sure you know ahead of time and plan for it.
+
+Avoid entire page downloads: All server communication after the initial page download should be managed by the Ajax engine. Don't ruin the user experience by downloading small amounts of data in one place, but reloading the entire page in others.
+
+User first: Design the Ajax application with the users in mind before anything else. Try to make the common use cases easy to accomplish and don't be caught up with how you're going to fit in advertising or cool effects.
+
+------------------------------------------------------------------------------
+
+2.  AJAX COMMUNICATION TECHNIQUE
+
+there are a lot of requests going back and forth between the browser and server while you are surfing the Web. Initially, all these requests happened because the user made an overt action that required such a step. Ajax techniques free developers from waiting for the user to make such an action, allowing you to create a call to the server at any time.
+
+The Hidden Frame Technique
+
+The basic idea behind this technique is to create a frameset that has a hidden frame that is used for client-server communication. You can hide a frame by setting its width or height to 0 pixels.
+
+The Pattern
+
+four-step pattern
+
+The first step always begins with the visible frame, where the user is interacting with a web page
+
+
+
+---------------------------------------------------------------------------
+
+3.	Discuss Cancel Pending Requests with respect to Ajax.
+
+
+
+An AJAX request is an HTTP request made using JavaScript, usually with the XMLHttpRequest object or the more modern fetch() API, to retrieve data from a server in the background, without disrupting the current state of the page. The data retrieved by an AJAX request can be in various formats, including plain text, HTML, JSON, or XML.
+
+Ajax request cancellation is the process of stopping an ongoing asynchronous HTTP request made with AJAX technology. It can be achieved by using the abort() method of the XHR (XMLHttpRequest) object. The abort() method stops the request and terminates the response. This can be useful in situations where a user initiates a request but then decides to cancel it before it has been completed. For instance, if a user starts a request to search for information, but then changes their mind and decides to search for something else before the first request has been completed, they can cancel the first request and start a new one with the updated information. However, once a request has been completed or has been canceled, its abort() method has no effect.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cancel Ajax Request</title>
+</head>
+<body>
+    <button id="startRequest">Start Request</button>
+    <button id="cancelRequest">Cancel Request</button>
+    <div id="result"></div>
+
+    <script>
+        let xhr;
+
+        document.getElementById('startRequest').addEventListener('click', function () {
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts/1', true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        document.getElementById('result').innerHTML = xhr.responseText;
+                    }
+                }
+            };
+
+            xhr.send();
+        });
+
+        document.getElementById('cancelRequest').addEventListener('click', function () {
+            if (xhr && xhr.readyState !== XMLHttpRequest.DONE) {
+                xhr.abort();
+                document.getElementById('result').innerHTML = 'Request canceled.';
+            }
+        });
+    </script>
+</body>
+</html>
+
+------------------------------------------------------------------------------
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Staff Information</title>
+</head>
+<body>
+    <h1>Staff Information</h1>
+    <button id="loadStaff">Load Staff</button>
+    <div id="staffData"></div>
+
+    <script>
+        document.getElementById('loadStaff').addEventListener('click', function () {
+            // Create an XMLHttpRequest object
+            const xhr = new XMLHttpRequest();
+
+            // Define the URL of the server-side script that fetches staff data
+            const url = 'get_staff.php';
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Display the staff data in the 'staffData' div
+                        document.getElementById('staffData').innerHTML = xhr.responseText;
+                    } else {
+                        console.error('Error:', xhr.status, xhr.statusText);
+                    }
+                }
+            };
+
+            // Send the GET request to the server
+            xhr.open('GET', url, true);
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
+
+
+
+<?php
+// Simulate database query and return staff data (replace with your database query)
+$staffData = [
+    ['name' => 'John Doe', 'position' => 'Manager'],
+    ['name' => 'Jane Smith', 'position' => 'Sales Associate'],
+    ['name' => 'Bob Johnson', 'position' => 'Developer'],
+];
+
+// Convert the staff data to JSON and echo it as the response
+echo json_encode($staffData);
+?>
+
+-----------------------------2
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webpage with Ajax</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Webpage with Ajax</h1>
+    </header>
+    <main>
+        <section id="content">
+            <h2>Random Dog Image</h2>
+            <button id="fetchDog">Fetch Dog</button>
+            <div id="dogImage">
+                <img src="" alt="Random Dog">
+            </div>
+        </section>
+    </main>
+    <script>
+
+document.getElementById('fetchDog').addEventListener('click', function () {
+    const xhr = new XMLHttpRequest();
+    const dogImage = document.getElementById('dogImage').querySelector('img');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                dogImage.src = response.message;
+            } else {
+                console.error('Error:', xhr.status, xhr.statusText);
+            }
+        }
+    };
+
+    xhr.open('GET', 'https://dog.ceo/api/breeds/image/random', true);
+    xhr.send();
+});
+
+</script>
+</body>
+</html>
