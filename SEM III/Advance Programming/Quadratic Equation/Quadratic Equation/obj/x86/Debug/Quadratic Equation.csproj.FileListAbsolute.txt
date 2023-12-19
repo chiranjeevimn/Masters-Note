@@ -1,0 +1,4 @@
+D:\CHIRANJEEVI AP\Quadratic Equation\Quadratic Equation\bin\Debug\Quadratic Equation.exe
+D:\CHIRANJEEVI AP\Quadratic Equation\Quadratic Equation\bin\Debug\Quadratic Equation.pdb
+D:\CHIRANJEEVI AP\Quadratic Equation\Quadratic Equation\obj\x86\Debug\Quadratic Equation.exe
+D:\CHIRANJEEVI AP\Quadratic Equation\Quadratic Equation\obj\x86\Debug\Quadratic Equation.pdb
