@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Program_3
+namespace Program_3_B
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter the Numerator");
-            int p = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter the numerator");
-            int q = int.Parse(Console.ReadLine());
+            int[] n = new int[6] { 66, 33, 56, 23, 81 ,1};
+            int i = 0;
+            int sum = 0;
             try
             {
-                int r = p / q;
-                Console.WriteLine("The value of quotient is {0} ", r);
+                for (i = 0; i < 6; i++)
+                {
+                    sum += n[i];
+                }
+                Console.WriteLine("Sum is : " + sum);
+                Console.ReadKey();
             }
-            catch(Exception e)
+            catch (IndexOutOfRangeException e)
             {
                 Console.WriteLine(e.Message);
             }
