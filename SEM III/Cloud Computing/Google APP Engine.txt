@@ -1,0 +1,48 @@
+what is GAE? with the help of architecture diagram explain various services provided by GAE.
+
+Google App Engine (GAE) is a fully managed, serverless platform that allows developers to build, deploy, and scale applications without managing the underlying infrastructure. It provides an environment for building and hosting web applications in Google's data centers.
+
+Figure 4.20 shows the major building blocks of the Google cloud platform which has been used to
+deliver the cloud services highlighted earlier. GFS is used for storing large amounts of data.
+MapReduce is for use in application program development. Chubby is used for distributed application lock services. BigTable offers a storage service for accessing structured data.
+Users can interact with Google applications via the web interface provided by each application. Third-party application providers can use GAE to
+build cloud applications for providing services. The applications all run in data centers under tight
+management by Google engineers. Inside each data center, there are thousands of servers forming different clusters.
+
+
+Google App Engine (GAE) provides several services to help developers build, deploy, and scale applications without managing the underlying infrastructure. Here are the key services offered by Google App Engine:
+
+1. **App Engine Standard Environment:**
+   - App Engine Standard provides a fully managed runtime environment for building applications. It supports several popular programming languages, including Python, Java, Go, and Node.js. Applications deployed in the standard environment automatically benefit from features like auto-scaling, load balancing, and security updates.
+
+2. **App Engine Flexible Environment:**
+   - App Engine Flexible offers a more customizable runtime environment compared to the standard environment. It supports multiple programming languages and allows you to use custom runtimes and custom libraries. The flexible environment runs on Google Kubernetes Engine (GKE), providing more control over the underlying infrastructure.
+
+3. **Datastore:**
+   - Google Cloud Datastore is a NoSQL, schema-less database service provided by GAE. It is designed to store and query data in a scalable and highly available manner. Datastore supports automatic sharding, enabling applications to scale horizontally.
+
+4. **Memcache:**
+   - Google Cloud Memcache is a fully managed, in-memory caching service. It helps improve the performance of applications by providing a fast and scalable cache for frequently accessed data.
+
+5. **Task Queues:**
+   - App Engine Task Queues enable asynchronous task execution for background processing. Developers can use task queues to offload time-consuming tasks, such as image processing or data analysis, from the main application thread.
+
+6. **Search API:**
+   - The Search API allows developers to implement full-text search functionality within their applications. It provides features like indexing and searching documents, making it easier to build search capabilities.
+
+7. **Blobstore:**
+   - Blobstore is a service for storing and serving large objects, such as images or files. It allows applications to efficiently manage and serve binary data without directly impacting the application code.
+
+8. **Google Cloud Storage:**
+   - Google Cloud Storage is a scalable object storage service that enables applications to store and retrieve large amounts of data, such as static files, images, and videos. It integrates seamlessly with App Engine applications.
+
+9. **Google Cloud Pub/Sub:**
+   - Google Cloud Pub/Sub is a messaging service that facilitates communication between various components of an application or between different applications. It enables scalable and asynchronous communication.
+
+10. **Google Cloud Endpoints:**
+    - Google Cloud Endpoints allows developers to create, deploy, and manage APIs for their applications. It supports the development of RESTful APIs and provides features like authentication, authorization, and API management.
+
+11. **Google Cloud Identity-Aware Proxy (IAP):**
+    - IAP provides identity-based access control for applications deployed on App Engine. It allows developers to control access based on user identity and the context of the request.
+
+These services collectively provide a comprehensive platform for building scalable and robust applications on Google App Engine. Developers can leverage these services to focus on building application logic while offloading tasks related to infrastructure management and scalability to the platform.
